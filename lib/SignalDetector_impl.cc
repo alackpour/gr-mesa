@@ -82,7 +82,7 @@ SignalDetector_impl::SignalDetector_impl(int fftsize, float squelchThreshold,
   // Set up PDUs
   message_port_register_in(pmt::mp("msgin"));
   set_msg_handler(pmt::mp("msgin"),
-                  boost::bind(&SignalDetector_impl::handleMsgIn, this, _1));
+		  [this](pmt::pmt_t msg) { this->handleMsgIn(msg); });
 
   message_port_register_out(pmt::mp("signaldetect"));
   message_port_register_out(pmt::mp("signals"));
