@@ -50,11 +50,11 @@ ioselector_impl::ioselector_impl(int numinputs, int numoutputs, int inputport,
 
   message_port_register_in(pmt::mp("inputindex"));
   set_msg_handler(pmt::mp("inputindex"),
-                  boost::bind(&ioselector_impl::handleMsgInputIndex, this, _1));
+		  [this](pmt::pmt_t msg) { this->handleMsgInputIndex(msg); });
   message_port_register_in(pmt::mp("outputindex"));
   set_msg_handler(
       pmt::mp("outputindex"),
-      boost::bind(&ioselector_impl::handleMsgOutputIndex, this, _1));
+	  [this](pmt::pmt_t msg) { this->handleMsgOutputIndex(msg); });
 }
 
 /*

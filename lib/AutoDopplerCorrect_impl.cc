@@ -114,7 +114,7 @@ AutoDopplerCorrect_impl::AutoDopplerCorrect_impl(
   // -------------------
   message_port_register_in(pmt::mp("msgin"));
   set_msg_handler(pmt::mp("msgin"),
-                  boost::bind(&AutoDopplerCorrect_impl::handleMsgIn, this, _1));
+		  [this](pmt::pmt_t msg) { this->handleMsgIn(msg); });
 
   message_port_register_out(pmt::mp("signaldetect"));
   message_port_register_out(pmt::mp("msgout"));

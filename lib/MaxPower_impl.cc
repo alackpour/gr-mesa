@@ -86,7 +86,7 @@ MaxPower_impl::MaxPower_impl(double sampleRate, int fft_size,
 
   message_port_register_in(pmt::mp("msgin"));
   set_msg_handler(pmt::mp("msgin"),
-                  boost::bind(&MaxPower_impl::handleMsgIn, this, _1));
+		  [this](pmt::pmt_t msg) { this->handleMsgIn(msg); });
 
   message_port_register_out(pmt::mp("out"));
   message_port_register_out(pmt::mp("maxpower"));
